@@ -9,9 +9,14 @@ use App\Models\Insult;
 class InsultComponent extends Component
 {
     use WithPagination;
-    
+    protected $paginationTheme = 'bootstrap';
     public $insult_id, $title, $body;
     public $view = 'create';
+    
+    protected $messages = [
+        'title.required' => 'Hagele pues mij@, no deje eso en blanco, flojo hp.',
+        'title.unique' => 'Ese ya lo dijeron, perr@'
+    ];
     
     public function render()
     {
@@ -23,7 +28,7 @@ class InsultComponent extends Component
     public function store() 
     {
         
-        $this->validate(['title' => 'required', 'body' => 'required']);
+        $this->validate(['title' => ['required', 'unique:insults'] , 'body' => 'required']);
         
         $insult = Insult::create([
             'title' => $this->title,
@@ -64,4 +69,6 @@ class InsultComponent extends Component
     public function destroy($id){
         Insult::destroy($id);
     }
+    
+
 }

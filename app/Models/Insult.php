@@ -13,4 +13,12 @@ class Insult extends Model
         'title',
         'body'
     ];
+    public function messages()
+    {
+        return [
+            'title.required' => 'Hagale pues mij@, no deje eso en blanco, pusilánime',
+            'title.unique:insults' => 'uy no, sea creativo, ese ya lo dijieron'
+            
+        ];
+    }
 }
